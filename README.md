@@ -1,74 +1,134 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# QTech Task - Job Portal API Documentation
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This API provides endpoints for managing job categories, jobs, and job applications.
 
-## System Requirements
+## Base URL
+`http://your-domain.com/api`
 
-- **PHP**: ^8.4
-- **Laravel**: ^11.9
-- **Composer**: ^2.0
+---
 
-## About Laravel
+## 🚀 Endpoints
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 1. Job Categories
+Fetch all available job categories.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+*   **URL:** `/job_categories`
+*   **Method:** `GET`
+*   **Response:**
+    ```json
+    {
+        "success": true,
+        "message": "Job Categories fetched successfully",
+        "data": [
+            {
+                "id": 1,
+                "title": "Software Development",
+                "status": "active"
+            }
+        ],
+        "code": 200
+    }
+    ```
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 2. Job List
+Fetch all active jobs.
 
-## Learning Laravel
+*   **URL:** `/jobs`
+*   **Method:** `GET`
+*   **Response:**
+    ```json
+    {
+        "success": true,
+        "message": "Jobs fetched successfully",
+        "data": [
+            {
+                "id": 1,
+                "title": "Laravel Developer",
+                "category": "Software Development",
+                "job_type": "full_time",
+                "location": "Remote",
+                "salary": "50k - 70k"
+            }
+        ],
+        "code": 200
+    }
+    ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 3. Job Details
+Fetch specific job details by ID.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+*   **URL:** `/jobs/{id}`
+*   **Method:** `GET`
+*   **Response:**
+    ```json
+    {
+        "success": true,
+        "message": "Job fetched successfully",
+        "data": {
+            "id": 1,
+            "title": "Laravel Developer",
+            "description": "Full job description here...",
+            "category": "Software Development",
+            "job_type": "full_time",
+            "location": "Remote"
+        },
+        "code": 200
+    }
+    ```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 4. Submit Application
+Submit a new job application.
 
-## Laravel Sponsors
+*   **URL:** `/applications`
+*   **Method:** `POST`
+*   **Request Body (Multipart/form-data):**
+    | Field | Type | Description |
+    | :--- | :--- | :--- |
+    | `job_id` | `integer` | ID of the job (Required, must exist in jobs table) |
+    | `name` | `string` | Full name of the applicant (Required) |
+    | `email` | `string` | Email address (Required) |
+    | `phone` | `string` | Phone number (Required) |
+    | `resume` | `file` | PDF/DOC/DOCX file, max 200MB (Required) |
+    | `cover_letter` | `text` | Introduction or cover letter (Optional) |
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+*   **Success Response:**
+    ```json
+    {
+        "success": true,
+        "message": "Application submitted successfully",
+        "data": {
+            "job_id": "1",
+            "name": "John Doe",
+            "email": "john@example.com",
+            "phone": "017XXXXXXXX",
+            "resume": "resumes/1740830000_resume.pdf",
+            "id": 5
+        },
+        "code": 200
+    }
+    ```
 
-### Premium Partners
+*   **Validation Error Response:**
+    ```json
+    {
+        "message": "The job id field is required. (and other errors...)",
+        "errors": {
+            "job_id": ["The job id field is required."],
+            "resume": ["The resume field is required."]
+        }
+    }
+    ```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+## 🛠 Admin Endpoints (Requires Auth)
+*Requires `auth:api` middleware and JWT token.*
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+*   **Store Job:** `POST /admin/jobs`
+*   **Delete Job:** `DELETE /admin/jobs/{id}`
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-
-# browgot_backend
+## 🔑 Authentication
+For admin endpoints, please include the JWT token in the header:
+`Authorization: Bearer <your_token>`
