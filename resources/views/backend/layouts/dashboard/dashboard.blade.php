@@ -95,36 +95,57 @@
         <!-- End Main Widgets -->
 
 
-        <!-- Start Main Widgets -->
-        {{-- <div class="row">
-            <div class="col-md-6 col-lg-4 col-xl">
-                <div class="card">
+        <!-- Start Stats Widgets -->
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 rounded-3">
                     <div class="card-body">
-                        <div class="widget-first">
-
-                            <div class="d-flex align-items-center mb-2">
-                                <div class="p-2 border border-primary border-opacity-10 bg-primary-subtle rounded-2 me-2">
-                                    <div class="bg-primary rounded-circle widget-size text-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            viewBox="0 0 24 24">
-                                            <path fill="#ffffff"
-                                                d="M12 4a4 4 0 0 1 4 4a4 4 0 0 1-4 4a4 4 0 0 1-4-4a4 4 0 0 1 4-4m0 10c4.42 0 8 1.79 8 4v2H4v-2c0-2.21 3.58-4 8-4" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <p class="mb-0 text-dark fs-15">Total Users</p>
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="p-2 bg-primary-subtle rounded-3 me-3 text-primary">
+                                <i data-feather="users" class="icon-lg"></i>
                             </div>
-
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h3 class="mb-0 fs-22 text-dark me-3">{{ $total_user }}</h3>
+                            <div>
+                                <p class="mb-0 text-muted fs-14 fw-medium">Total Users</p>
+                                <h3 class="mb-0 fs-24 fw-bold text-dark">{{ $total_user }}</h3>
                             </div>
-
                         </div>
                     </div>
                 </div>
             </div>
-        </div> --}}
-        <!-- End Main Widgets -->
+
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 rounded-3">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="p-2 bg-success-subtle rounded-3 me-3 text-success">
+                                <i data-feather="briefcase" class="icon-lg"></i>
+                            </div>
+                            <div>
+                                <p class="mb-0 text-muted fs-14 fw-medium">Total Jobs</p>
+                                <h3 class="mb-0 fs-24 fw-bold text-dark">{{ $total_job }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0 rounded-3">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-2">
+                            <div class="p-2 bg-info-subtle rounded-3 me-3 text-info">
+                                <i data-feather="file-text" class="icon-lg"></i>
+                            </div>
+                            <div>
+                                <p class="mb-0 text-muted fs-14 fw-medium">Applications</p>
+                                <h3 class="mb-0 fs-24 fw-bold text-dark">{{ $total_application }}</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Stats Widgets -->
 
     </div>
 @endsection

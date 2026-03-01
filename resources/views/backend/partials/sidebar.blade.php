@@ -74,30 +74,50 @@
                 </li>
 
                 <li>
-                    <a class="{{ Request::routeIs('job_category.*') || Request::routeIs('job.*') || Request::routeIs('job.application.*') ? 'active open' : ' ' }}"
+                    <a class="{{ Request::routeIs('job_category.*') || Request::routeIs('job.*') ? 'active open' : ' ' }}"
                         href="#sidebarJobs" data-bs-toggle="collapse">
                         <i data-feather="briefcase"></i>
                         <span> Jobs </span>
                         <span class="menu-arrow"></span>
                     </a>
-                    <div class="collapse {{ Request::routeIs('job_category.*') || Request::routeIs('job.*') || Request::routeIs('job.application.*') ? 'show' : '' }}"
+                    <div class="collapse {{ Request::routeIs('job_category.*') || Request::routeIs('job.*') ? 'show' : '' }}"
                         id="sidebarJobs">
                         <ul class="nav-second-level">
                             <li>
                                 <a href="{{ route('job_category.index') }}"
                                     class="{{ Request::routeIs('job_category.*') ? 'active' : ' ' }} tp-link">Job
-                                    Category List</a>
+                                    Categories</a>
                             </li>
 
                             <li>
                                 <a href="{{ route('job.index') }}"
-                                    class="{{ Request::routeIs('job.*') ? 'active' : ' ' }} tp-link">Job List</a>
+                                    class="{{ Request::routeIs('job.index') || Request::routeIs('job.create') || Request::routeIs('job.edit') ? 'active' : ' ' }} tp-link">Job List</a>
                             </li>
 
                             <li>
                                 <a href="{{ route('job.application.index') }}"
-                                    class="{{ Request::routeIs('job.application.*') ? 'active' : ' ' }} tp-link">Job
-                                    Application List</a>
+                                    class="{{ Request::routeIs('job.application.*') ? 'active' : ' ' }} tp-link">Job Applications</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <a class="{{ Request::routeIs('blog.*') ? 'active open' : ' ' }}" href="#sidebarBlog"
+                        data-bs-toggle="collapse">
+                        <i data-feather="file-text"></i>
+                        <span> Blog </span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse {{ Request::routeIs('blog.*') ? 'show' : '' }}" id="sidebarBlog">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('blog.index') }}"
+                                    class="{{ Request::routeIs('blog.index') ? 'active' : ' ' }} tp-link">Blog List</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('blog.create') }}"
+                                    class="{{ Request::routeIs('blog.create') ? 'active' : ' ' }} tp-link">Add Blog</a>
                             </li>
                         </ul>
                     </div>

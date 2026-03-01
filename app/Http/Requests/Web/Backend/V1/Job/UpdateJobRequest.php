@@ -18,6 +18,7 @@ class UpdateJobRequest extends FormRequest
     {
         return [
             'title' => 'sometimes|string|max:255',
+            'company' => 'sometimes|string|max:255',
             'description' => 'nullable|string',
             'salary' => 'nullable|string|max:255',
             'location' => 'nullable|string|max:255',

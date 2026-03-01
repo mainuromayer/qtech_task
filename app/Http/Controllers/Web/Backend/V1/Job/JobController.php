@@ -22,20 +22,20 @@ class JobController extends Controller
                 return DataTables::of($data)
                     ->addIndexColumn()
                     ->addColumn('category', function ($data) {
-                    return $data->category->title ?? '-';
-                })
+                        return $data->category->title ?? '-';
+                    })
                     ->addColumn('status', function ($data) {
-                    $status = '';
-                    $status .= '<div class="form-check form-switch">';
-                    $status .= '<input class="form-check-input" type="checkbox" role="switch" id="flexSwitch' . $data->id . '" onclick="showStatusChangeAlert(' . $data->id . ')" getAreaid="' . $data->id . '" name="status"';
-                    if ($data->status == "active") {
-                        $status .= ' checked';
-                    }
-                    $status .= '></div>';
-                    return $status;
-                })
+                        $status = '';
+                        $status .= '<div class="form-check form-switch">';
+                        $status .= '<input class="form-check-input" type="checkbox" role="switch" id="flexSwitch' . $data->id . '" onclick="showStatusChangeAlert(' . $data->id . ')" getAreaid="' . $data->id . '" name="status"';
+                        if ($data->status == "active") {
+                            $status .= ' checked';
+                        }
+                        $status .= '></div>';
+                        return $status;
+                    })
                     ->addColumn('action', function ($data) {
-                    return '<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
+                        return '<div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                                   <a href="' . route('job.edit', $data->id) . '" type="button" class="btn btn-icon btn-sm bg-success-subtle me-1" title="Edit">
                                   <i class="mdi mdi-pencil-outline fs-14 text-success"></i>
                                   </a>&nbsp;
@@ -43,14 +43,13 @@ class JobController extends Controller
                                   <i class="mdi mdi-delete fs-14 text-danger"></i>
                                 </a>
                                 </div>';
-                })
+                    })
                     ->rawColumns(['status', 'action'])
                     ->make(true);
             }
 
             return view('backend.layouts.V1.job.index');
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             ToastMagic::error('Job Index Failed' . $e->getMessage());
             return redirect()->back();
         }
@@ -61,8 +60,7 @@ class JobController extends Controller
         try {
             $categories = JobCategory::where('status', 'active')->get();
             return view('backend.layouts.V1.job.create', compact('categories'));
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             ToastMagic::error('Job Create Failed' . $e->getMessage());
             return redirect()->back();
         }
@@ -73,6 +71,7 @@ class JobController extends Controller
         try {
             $data = new Job();
             $data->title = $request->title;
+            $data->company = $request->company;
             $data->description = $request->description;
             $data->salary = $request->salary;
             $data->location = $request->location;
@@ -85,8 +84,7 @@ class JobController extends Controller
 
             ToastMagic::success('Job Created Successfully');
             return redirect()->route('job.index');
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             ToastMagic::error('Job Create Failed' . $e->getMessage());
             return redirect()->back();
         }
@@ -98,8 +96,7 @@ class JobController extends Controller
             $job = Job::findOrFail($id);
             $categories = JobCategory::where('status', 'active')->get();
             return view('backend.layouts.V1.job.edit', compact('job', 'categories'));
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             ToastMagic::error('Job Edit Failed' . $e->getMessage());
             return redirect()->back();
         }
@@ -110,6 +107,7 @@ class JobController extends Controller
         try {
             $data = Job::findOrFail($id);
             $data->title = $request->title;
+            $data->company = $request->company;
             $data->description = $request->description;
             $data->salary = $request->salary;
             $data->location = $request->location;
@@ -121,8 +119,7 @@ class JobController extends Controller
 
             ToastMagic::success('Job Updated Successfully');
             return redirect()->route('job.index');
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             ToastMagic::error('Job Update Failed' . $e->getMessage());
             return redirect()->back();
         }
@@ -140,8 +137,7 @@ class JobController extends Controller
                     'success' => true,
                     'message' => 'Status changed to Inactive.',
                 ]);
-            }
-            else {
+            } else {
                 $data->status = 'active';
                 $data->save();
                 return response()->json([
@@ -149,8 +145,7 @@ class JobController extends Controller
                     'message' => 'Status changed to Active.',
                 ]);
             }
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             ToastMagic::error('Job Status Failed' . $e->getMessage());
             return redirect()->back();
         }
@@ -166,8 +161,7 @@ class JobController extends Controller
                 'success' => true,
                 'message' => 'Deleted successfully.',
             ]);
-        }
-        catch (Exception $e) {
+        } catch (Exception $e) {
             ToastMagic::error('Job Delete Failed' . $e->getMessage());
             return redirect()->back();
         }
