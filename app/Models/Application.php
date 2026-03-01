@@ -12,8 +12,8 @@ class Application extends Model
         'name',
         'email',
         'phone',
-        'resume',
-        'cover_letter',
+        'resume_link',
+        'cover_note',
         'status',
     ];
 

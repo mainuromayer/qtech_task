@@ -45,6 +45,7 @@ class JobController extends Controller
       try {
          $data = new Job();
          $data->title = $request->title;
+         $data->company = $request->company;
          $data->description = $request->description;
          $data->salary = $request->salary;
          $data->location = $request->location;

@@ -45,8 +45,7 @@
                                         <th>Job Title</th>
                                         <th>Applicant Name</th>
                                         <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Resume</th>
+                                        <th>Resume Link</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
@@ -84,7 +83,6 @@
                         { data: 'job_title', name: 'job.title', orderable: true, searchable: true },
                         { data: 'name', name: 'name', orderable: true, searchable: true },
                         { data: 'email', name: 'email', orderable: true, searchable: true },
-                        { data: 'phone', name: 'phone', orderable: true, searchable: true },
                         { data: 'resume_link', name: 'resume_link', orderable: false, searchable: false },
                         { data: 'status', name: 'status', orderable: true, searchable: true },
                         { data: 'action', name: 'action', orderable: false, searchable: false }

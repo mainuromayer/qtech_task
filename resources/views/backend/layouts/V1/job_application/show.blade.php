@@ -34,10 +34,6 @@
                                 <td>{{ $application->email }}</td>
                             </tr>
                             <tr>
-                                <th>Phone</th>
-                                <td>{{ $application->phone }}</td>
-                            </tr>
-                            <tr>
                                 <th>Applied For</th>
                                 <td>{{ $application->job->title ?? 'N/A' }}</td>
                             </tr>
@@ -46,11 +42,10 @@
                                 <td>{{ $application->created_at->format('M d, Y h:i A') }}</td>
                             </tr>
                             <tr>
-                                <th>Resume</th>
+                                <th>Resume Link</th>
                                 <td>
-                                    <a href="{{ asset('storage/' . $application->resume) }}" target="_blank"
-                                        class="btn btn-sm btn-info">
-                                        <i class="fas fa-file-pdf"></i> View Resume
+                                    <a href="{{ $application->resume_link }}" target="_blank" class="btn btn-sm btn-info">
+                                        <i class="fas fa-link"></i> View Resume
                                     </a>
                                 </td>
                             </tr>
@@ -66,9 +61,9 @@
                         </table>
 
                         <div class="mt-4">
-                            <h6>Cover Letter:</h6>
+                            <h6>Cover Note:</h6>
                             <div class="p-3 bg-light border rounded">
-                                {!! nl2br(e($application->cover_letter)) !!}
+                                {!! nl2br(e($application->cover_note)) !!}
                             </div>
                         </div>
                     </div>

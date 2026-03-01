@@ -32,7 +32,7 @@ class ApplicationController extends Controller
                         return $row->job->title ?? 'N/A';
                     })
                     ->addColumn('resume_link', function ($row) {
-                        return '<a href="' . asset('storage/' . $row->resume) . '" target="_blank" class="btn btn-sm btn-info">View Resume</a>';
+                        return '<a href="' . $row->resume_link . '" target="_blank" class="btn btn-sm btn-info">View Resume</a>';
                     })
                     ->addColumn('action', function ($row) {
                         $btn = '<div class="btn-group btn-group-sm">

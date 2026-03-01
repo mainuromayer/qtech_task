@@ -18,15 +18,8 @@ class ApplicationController extends Controller
             $application->job_id = $request->job_id;
             $application->name = $request->name;
             $application->email = $request->email;
-            $application->phone = $request->phone;
-            $application->cover_letter = $request->cover_letter;
-
-            if ($request->hasFile('resume')) {
-                $file = $request->file('resume');
-                $filename = time() . '_' . $file->getClientOriginalName();
-                $path = $file->storeAs('resumes', $filename, 'public');
-                $application->resume = $path;
-            }
+            $application->resume_link = $request->resume_link;
+            $application->cover_note = $request->cover_note;
 
             $application->save();
 

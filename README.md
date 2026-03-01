@@ -44,6 +44,7 @@ Fetch all active jobs.
             {
                 "id": 1,
                 "title": "Laravel Developer",
+                "company": "QTech Solutions",
                 "category": "Software Development",
                 "job_type": "full_time",
                 "location": "Remote",
@@ -67,6 +68,7 @@ Fetch specific job details by ID.
         "data": {
             "id": 1,
             "title": "Laravel Developer",
+            "company": "QTech Solutions",
             "description": "Full job description here...",
             "category": "Software Development",
             "job_type": "full_time",
@@ -81,15 +83,14 @@ Submit a new job application.
 
 *   **URL:** `/applications`
 *   **Method:** `POST`
-*   **Request Body (Multipart/form-data):**
+*   **Request Body (JSON / Form-data):**
     | Field | Type | Description |
     | :--- | :--- | :--- |
     | `job_id` | `integer` | ID of the job (Required, must exist in jobs table) |
     | `name` | `string` | Full name of the applicant (Required) |
-    | `email` | `string` | Email address (Required) |
-    | `phone` | `string` | Phone number (Required) |
-    | `resume` | `file` | PDF/DOC/DOCX file, max 200MB (Required) |
-    | `cover_letter` | `text` | Introduction or cover letter (Optional) |
+    | `email` | `string` | Valid email address (Required) |
+    | `resume_link` | `string` | Valid URL to resume (Required) |
+    | `cover_note` | `text` | Introduction or cover letter (Optional) |
 
 *   **Success Response:**
     ```json
@@ -100,8 +101,8 @@ Submit a new job application.
             "job_id": "1",
             "name": "John Doe",
             "email": "john@example.com",
-            "phone": "017XXXXXXXX",
-            "resume": "resumes/1740830000_resume.pdf",
+            "resume_link": "https://googledrive.com/my-resume.pdf",
+            "cover_note": "I am interested in this role.",
             "id": 5
         },
         "code": 200
@@ -111,10 +112,9 @@ Submit a new job application.
 *   **Validation Error Response:**
     ```json
     {
-        "message": "The job id field is required. (and other errors...)",
+        "message": "The resume link field must be a valid URL. (and other errors...)",
         "errors": {
-            "job_id": ["The job id field is required."],
-            "resume": ["The resume field is required."]
+            "resume_link": ["The resume link field must be a valid URL."]
         }
     }
     ```

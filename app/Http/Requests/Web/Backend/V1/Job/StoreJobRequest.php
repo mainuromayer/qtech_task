@@ -18,6 +18,7 @@ class StoreJobRequest extends FormRequest
     {
         return [
             'title' => 'required|string|max:255',
+            'company' => 'required|string|max:255',
             'description' => 'nullable|string',
             'salary' => 'nullable|string|max:255',
             'location' => 'nullable|string|max:255',

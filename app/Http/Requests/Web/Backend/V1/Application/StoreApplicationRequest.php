@@ -20,9 +20,8 @@ class StoreApplicationRequest extends FormRequest
             'job_id' => 'required|exists:jobs,id',
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
-            'phone' => 'required|string|max:20',
-            'resume' => 'required|file|mimes:pdf,doc,docx|max:204800',
-            'cover_letter' => 'nullable|string',
+            'resume_link' => 'required|url|max:255',
+            'cover_note' => 'nullable|string',
         ];
     }
 }
